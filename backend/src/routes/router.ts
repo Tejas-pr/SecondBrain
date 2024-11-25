@@ -7,7 +7,7 @@ import uuid4 from "uuid4";
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  // zod and try catch block
+  // zod and try catch block and bcrypt the password
   const username = req.body.username;
   const password = req.body.password;
 

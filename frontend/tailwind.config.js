@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        slate: {
+          300: "#d3d3d3",
+        },
         purple: {
           300: "#dde4fb",
           500: "#4e5393",
