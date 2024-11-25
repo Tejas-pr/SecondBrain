@@ -8,15 +8,19 @@ const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   // zod and try catch block and bcrypt the password
-  const username = req.body.username;
-  const password = req.body.password;
+  try {
+    const username = req.body.username;
+    const password = req.body.password;
 
-  await useModel.create({
-    username: username,
-    password: password,
-  });
+    await useModel.create({
+      username: username,
+      password: password,
+    });
 
-  res.status(400).send("User created");
+    res.status(200).send("User created");
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 router.post("/signin", async (req, res) => {

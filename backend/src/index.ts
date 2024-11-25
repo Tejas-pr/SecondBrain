@@ -2,10 +2,12 @@ import expess from "express";
 import mongoose from "mongoose";
 import router from "./routes/router";
 import dotenv from "dotenv";
+import cors from "cors";
 
 const app = expess();
 dotenv.config();
 app.use(expess.json());
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGOO_URL as string)
