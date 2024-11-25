@@ -1,19 +1,22 @@
 import expess from "express";
-import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import router from "./routes/router";
+import dotenv from "dotenv";
 
 const app = expess();
+dotenv.config();
+app.use(expess.json());
 
-app.post("/api/v1/signup", (req, res) => {});
+mongoose
+  .connect(process.env.MONGOO_URL as string)
+  .then(() => {
+    app.listen(3000, () => {
+      console.log("Server is running on port 3000");
+    });
+  })
+  .catch((error) => {
+    console.error("Database connection failed:", error.message);
+    process.exit(1);
+  });
 
-app.post("/api/v1/signin", (req, res) => {});
-
-app.post("/api/v1/content", (req, res) => {});
-
-app.get("/api/v1/content", (req, res) => {});
-
-app.delete("/api/v1/content", (req, res) => {});
-
-app.post("/api/v1/brain/share", (req, res) => {});
-
-app.get("/api/v1/brain/:shareLink", (req, res) => {});
+app.use("/api/v1/", router);
