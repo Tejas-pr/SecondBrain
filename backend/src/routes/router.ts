@@ -49,12 +49,14 @@ router.post("/signin", async (req, res) => {
 
 // @ts-ignore
 router.post("/content", isValidMiddleware, async (req, res) => {
+  const title = req.body.title
   const link = req.body.link;
   const type = req.body.type;
 
   await contentModel.create({
     link,
     type,
+    title,
     // @ts-ignore
     userId: req.userId,
     tags: [],
@@ -75,7 +77,7 @@ router.get("/content", isValidMiddleware, async (req, res) => {
     })
     .populate("userId", "username");
   res.json({
-    content,
+    content
   });
 });
 
@@ -103,7 +105,7 @@ router.post("/brain/share", isValidMiddleware, async (req, res) => {
 
     if (existingLink) {
       res.json({
-        hash: existingLink.hash,
+        uniqueId: existingLink.hash,
       });
       return;
     }
